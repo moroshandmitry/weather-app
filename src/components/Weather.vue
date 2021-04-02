@@ -2,7 +2,7 @@
     <div class="weather">
       <h1>Wellcome to weather app!</h1>
       <input class="input-default" type="text" v-model="city" @keyup.enter="weather" placeholder="Weather in your city">
-      <button class="btn-default" v-on:click="weather">Search from your city</button>
+      <button class="btn-default" @click="weather">Search from your city</button>
       <div class="get-weather">{{ getWeather }}</div>
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       getWeather: null,
-      city: null,
+      city: 'Chisinau',
     };
   },
   methods: {
@@ -23,8 +23,17 @@ export default {
       this.getWeather = await this.axios
         .get(URL)
         .then((response) => {
-          const {name, main} = response.data
-          return `In ${name} ${main.temp}°C` 
+          const {name, main, weather, visibility, sys, coord, wind, timezone} = response.data
+          return `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()} In ${name} ${main.temp}°C
+          Feels like ${main.feels_like}°C
+          ${weather[0].main} -
+          ${weather[0].description}
+          humidity - ${main.humidity}%
+          visibility - ${visibility / 1000}km
+          country - ${sys.country}
+          coordinates - longitude ${coord.lon} latitude ${coord.lat}
+          wind speed - ${wind.speed}m/s
+          timezone - ${timezone}`
         });
     },
   },
