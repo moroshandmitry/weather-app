@@ -1,2 +1,2 @@
 # weather-app
-Weather
+This application about weather!
