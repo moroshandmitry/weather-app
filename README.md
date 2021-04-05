@@ -1,6 +1,8 @@
 # weather-app
+```
 To get weather in your city
-Write city in input and press 'enter' or 'button'
+write city in input and press 'enter' or 'button'
+```
 
 ## Project setup
 ```
